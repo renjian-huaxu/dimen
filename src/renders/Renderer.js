@@ -140,17 +140,17 @@ class Renderer {
           object.screen.x *= object.screen.z;
           object.screen.y *= object.screen.z;
 
-          if (particlePool[particleCount] == null) {
-            particlePool[particleCount] = new RenderableParticle();
+          if (this.particlePool[particleCount] == null) {
+            this.particlePool[particleCount] = new RenderableParticle();
           }
-          particlePool[particleCount].x = object.screen.x;
-          particlePool[particleCount].y = object.screen.y;
-          particlePool[particleCount].screenZ = object.screen.z;
+          this.particlePool[particleCount].x = object.screen.x;
+          this.particlePool[particleCount].y = object.screen.y;
+          this.particlePool[particleCount].screenZ = object.screen.z;
 
-          particlePool[particleCount].size = object.size;				
-          particlePool[particleCount].material = object.material;
-          particlePool[particleCount].color = object.color;
-          this.renderList.push( particlePool[particleCount] );
+          this.particlePool[particleCount].size = object.size;				
+          this. particlePool[particleCount].material = object.material;
+          this.particlePool[particleCount].color = object.color;
+          this.renderList.push( this.particlePool[particleCount] );
           particleCount++;
         }
 

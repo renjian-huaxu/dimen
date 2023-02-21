@@ -909,16 +909,16 @@
             if (object.screen.z > 0) {
               object.screen.x *= object.screen.z;
               object.screen.y *= object.screen.z;
-              if (particlePool[particleCount] == null) {
-                particlePool[particleCount] = new RenderableParticle();
+              if (_this.particlePool[particleCount] == null) {
+                _this.particlePool[particleCount] = new RenderableParticle();
               }
-              particlePool[particleCount].x = object.screen.x;
-              particlePool[particleCount].y = object.screen.y;
-              particlePool[particleCount].screenZ = object.screen.z;
-              particlePool[particleCount].size = object.size;
-              particlePool[particleCount].material = object.material;
-              particlePool[particleCount].color = object.color;
-              _this.renderList.push(particlePool[particleCount]);
+              _this.particlePool[particleCount].x = object.screen.x;
+              _this.particlePool[particleCount].y = object.screen.y;
+              _this.particlePool[particleCount].screenZ = object.screen.z;
+              _this.particlePool[particleCount].size = object.size;
+              _this.particlePool[particleCount].material = object.material;
+              _this.particlePool[particleCount].color = object.color;
+              _this.renderList.push(_this.particlePool[particleCount]);
               particleCount++;
             }
           }
@@ -1008,6 +1008,7 @@
       key: "render",
       value: function render(scene, camera) {
         var _this2 = this;
+        var pi2 = Math.PI * 2;
         this.context.clearRect(-this.viewport.width / 2, -this.viewport.height / 2, this.viewport.width, this.viewport.height);
         this.project(scene, camera);
         this.renderList.map(function (element) {
@@ -1049,13 +1050,6 @@
             _this2.context.closePath();
           });
         });
-
-        // this.context.beginPath();
-        // this.context.lineWidth = 2;
-        // this.context.strokeStyle = "red";
-        // this.context.arc(0, 0, 20, 0, 2 * Math.PI);
-        // this.context.stroke();
-        // this.context.closePath();
       }
     }]);
     return CanvasRender;
@@ -1334,6 +1328,7 @@
   exports.Matrix3 = Matrix3;
   exports.Matrix4 = Matrix4;
   exports.Mesh = Mesh;
+  exports.Particle = Particle;
   exports.Plane = Plane;
   exports.Scene = Scene;
   exports.Vector2 = Vector2;

@@ -14,6 +14,8 @@ export { Vector4 } from './core/Vector4'
 export { Cube } from './geometry/primitives/Cube'
 export { Plane } from './geometry/primitives/Plane'
 
+export { Particle } from './objects/Particle'
+
 export { ColorFillMaterial } from './materials/ColorFillMaterial'
 export { ColorStrokeMaterial } from './materials/ColorStrokeMaterial'
 export { FaceColorFillMaterial } from './materials/FaceColorFillMaterial'

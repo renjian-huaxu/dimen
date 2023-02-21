@@ -26,6 +26,8 @@ class CanvasRender extends Renderer {
 
   render(scene, camera) {
 
+    const pi2 = Math.PI * 2
+
     this.context.clearRect (-this.viewport.width / 2, -this.viewport.height / 2, this.viewport.width, this.viewport.height);
 
     this.project(scene, camera);
@@ -88,13 +90,6 @@ class CanvasRender extends Renderer {
       })
 
     })
-
-    // this.context.beginPath();
-    // this.context.lineWidth = 2;
-    // this.context.strokeStyle = "red";
-    // this.context.arc(0, 0, 20, 0, 2 * Math.PI);
-    // this.context.stroke();
-    // this.context.closePath();
     
   }
   
