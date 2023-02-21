@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../build/dimen.js"></script>
+  <style>
+    body { margin: 0; }
+  </style>
+</head>
+<body>
+  <script>
+    var SCREEN_WIDTH = window.innerWidth;
+    var SCREEN_HEIGHT = window.innerHeight;
+
+    var container = document.createElement('div');
+    document.body.appendChild(container);
+
+    var camera = new Dimen.Camera(0, 150, 400);
+    camera.focus = 300;
+    camera.target.position.y = 150;
+    camera.updateMatrix();
+
+    var scene = new Dimen.Scene();
+
+    var geometry = new Dimen.Cube(200, 200, 200);
+
+    geometry.faces.map(v => {
+      v.color.setRGBA( Math.floor( Math.random() * 128), Math.floor( Math.random() * 128 + 128), Math.floor( Math.random() * 128 + 128), 255 )
+    })
+
+    var cube = new Dimen.Mesh(geometry, new Dimen.FaceColorFillMaterial());
+    cube.position.y = 150;
+    cube.updateMatrix();
+    scene.add(cube);
+
+    var plane = new Dimen.Mesh(new Dimen.Plane(200, 200), new Dimen.ColorFillMaterial(0xe0e0e0));
+    plane.rotation.x = 90 * (Math.PI / 180);
+    plane.updateMatrix();
+    scene.add(plane);
+
+    var render = new Dimen.CanvasRender(scene);
+    render.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    render.render(scene, camera);
+    container.appendChild(render.domElement);
+
+  </script>
+</body>
+</html>
