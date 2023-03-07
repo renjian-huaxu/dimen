@@ -7,6 +7,7 @@ const watchOptions = {
   output: {
       format: 'umd',
       name: 'Dimen',
+      sourcemap: true,
       file: './build/dimen.js'
   },
   plugins: [babel({ 

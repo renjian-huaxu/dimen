@@ -25,11 +25,11 @@ class Matrix4 {
 		this.z.normalize();
 
 		this.x.copy(this.z);
-		this.x.cross(up);
+		this.x.crossSelf(up);
 		this.x.normalize();
 
 		this.y.copy(this.x);
-		this.y.cross(this.z);
+		this.y.crossSelf(this.z);
 		this.y.normalize();
 		this.y.negate(); //
 

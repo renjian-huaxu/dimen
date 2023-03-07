@@ -5,6 +5,7 @@ import { Vector3 } from '../../core/Vector3'
 import { Face4 } from '../../core/Face4'
 
 class Cube extends Geometry{
+  
   constructor(width, height, depth) {
       super();
 

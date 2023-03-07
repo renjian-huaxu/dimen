@@ -6,6 +6,13 @@ class Vector4 {
     this.w = w || 1;
   }
 
+  set(x, y, z, w) {
+    this.x = x;
+		this.y = y;
+		this.z = z;
+		this.w = w;
+  }
+
   copy(v) {
     this.x = v.x;
 		this.y = v.y;

@@ -19,6 +19,8 @@ class Camera {
     this.zoom = 3;
     this.focus = 500;
 
+    this.autoUpdateMatrix = true;
+
     this.updateMatrix();
   }
 

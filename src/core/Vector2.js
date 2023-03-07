@@ -4,6 +4,11 @@ class Vector2 {
     this.y = y || 0;
   }
 
+  set(x, y) {
+    this.x = x;
+		this.y = y;
+  }
+
   copy(v) {
     this.x = v.x;
 		this.y = v.y;
@@ -20,22 +25,22 @@ class Vector2 {
   }
 
   subSelf(v) {
+		this.x -= v.x;
+		this.y -= v.y;
+  }
+
+  sub(v1, v2) {
     this.x = v1.x - v2.x;
 		this.y = v1.y - v2.y;
   }
 
-  multiply(s) {
+  multiplyScalar(s) {
     this.x *= s;
 		this.y *= s;
   }
 
   unit() {
-    this.multiply(1 / this.length());
-  }
-
-  expand(v1, v2) {
-    this.unit( this.sub(v2, v1) );
-		v2.addSelf(this);
+    this.multiplyScalar(1 / this.length());
   }
 
   length() {

@@ -11,7 +11,7 @@ class Matrix3 {
 		this.n31 = 0; this.n32 = 0; this.n33 = 1;
   }
 
-  assign() {
+  assign(m) {
     this.n11 = m.n11; this.n12 = m.n12; this.n13 = m.n13;
 		this.n21 = m.n21; this.n22 = m.n22; this.n23 = m.n23;
 		this.n31 = m.n31; this.n32 = m.n32; this.n33 = m.n33;

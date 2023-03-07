@@ -6,6 +6,7 @@ export default [
         output: {
             format: 'umd',
             name: 'Dimen',
+            sourcemap: true,
             file: './build/dimen.js'
         },
         plugins: [commonjs(), babel({

@@ -20,6 +20,8 @@ export { ColorFillMaterial } from './materials/ColorFillMaterial'
 export { ColorStrokeMaterial } from './materials/ColorStrokeMaterial'
 export { FaceColorFillMaterial } from './materials/FaceColorFillMaterial'
 export { FaceColorStrokeMaterial } from './materials/FaceColorStrokeMaterial'
+export { TextureUVMappingMaterial } from './materials/TextureUVMappingMaterial'
 
 export { Mesh } from './objects/Mesh'
+
 

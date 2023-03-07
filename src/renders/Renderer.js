@@ -23,26 +23,25 @@ class Renderer {
   project(scene, camera) {
     this.renderList = [];
 
-    // scene.objects.map(v => this.renderList.push(v))
-
-    let i, j, vertex, face, object, v1, v2, v3, v4,
+    let v1, v2, v3, v4,
 		face3count = 0, face4count = 0, particleCount = 0,
-		camerafocus = camera.focus, focuszoom = camera.focus * camera.zoom,
-		verticesLength = 0, facesLength = 0;
+		camerafocus = camera.focus, focuszoom = camera.focus * camera.zoom;
+
+    if(camera.autoUpdateMatrix) {
+			camera.updateMatrix();
+		}
 
     scene.objects.map(object => {
+      if(object.autoUpdateMatrix) {
+				object.updateMatrix();
+			}
 
       if (object instanceof Mesh) {
+
         this.matrix.multiply(camera.matrix, object.matrix);
 
-        // vertices
-        verticesLength = object.geometry.vertices.length;
-
-        for (j = 0; j < verticesLength; j++) {
-				
-					vertex = object.geometry.vertices[j];
-
-					vertex.screen.copy(vertex.position);
+        object.geometry.vertices.map(vertex => {
+          vertex.screen.copy(vertex.position);
 
 					this.matrix.transform(vertex.screen);
 
@@ -52,43 +51,44 @@ class Renderer {
 
 					vertex.screen.x *= vertex.screen.z;
 					vertex.screen.y *= vertex.screen.z; 
-				}
+        })
 
-        // faces
-        facesLength = object.geometry.faces.length;
-        for (j = 0; j < facesLength; j++) {
-          face = object.geometry.faces[j];
+        object.geometry.faces.map((face, index) => {
 
           if (face instanceof Face3) {
+
             v1 = object.geometry.vertices[face.a];
 						v2 = object.geometry.vertices[face.b];
 						v3 = object.geometry.vertices[face.c];
 
-            if (v1.visible && v2.visible && v3.visible && (object.doubleSided ||
+						if (v1.visible && v2.visible && v3.visible && (object.doubleSided ||
               (v3.screen.x - v1.screen.x) * (v2.screen.y - v1.screen.y) -
               (v3.screen.y - v1.screen.y) * (v2.screen.x - v1.screen.x) > 0) ) {
-              
-             face.screen.z = (v1.screen.z + v2.screen.z + v3.screen.z) * 0.3;
-             
-             if (this.face3Pool[face3count] == null) {
-              this.face3Pool[face3count] = new RenderableFace3();
-             }
-  
-             this.face3Pool[face3count].v1.x = v1.screen.x;
-             this.face3Pool[face3count].v1.y = v1.screen.y;
-             this.face3Pool[face3count].v2.x = v2.screen.x;
-             this.face3Pool[face3count].v2.y = v2.screen.y;
-             this.face3Pool[face3count].v3.x = v3.screen.x;
-             this.face3Pool[face3count].v3.y = v3.screen.y;
-             this.face3Pool[face3count].screenZ = face.screen.z;
-             
-             this.face3Pool[face3count].color = face.color;
-             this.face3Pool[face3count].material = object.material;
-  
-             this.renderList.push(this.face3Pool[face3count]);
-  
-             face3count++;
-           }
+
+							face.screen.z = (v1.screen.z + v2.screen.z + v3.screen.z) * 0.3;
+
+							if (!this.face3Pool[face3count]) {
+
+								this.face3Pool[face3count] = new RenderableFace3();
+
+							}
+
+							this.face3Pool[face3count].v1.x = v1.screen.x;
+							this.face3Pool[face3count].v1.y = v1.screen.y;
+							this.face3Pool[face3count].v2.x = v2.screen.x;
+							this.face3Pool[face3count].v2.y = v2.screen.y;
+							this.face3Pool[face3count].v3.x = v3.screen.x;
+							this.face3Pool[face3count].v3.y = v3.screen.y;
+							this.face3Pool[face3count].screenZ = face.screen.z;
+
+							this.face3Pool[face3count].material = object.material;
+							this.face3Pool[face3count].uvs = object.geometry.uvs[index];
+							this.face3Pool[face3count].color = face.color;
+
+							this.renderList.push(this.face3Pool[face3count]);
+
+							face3count++;
+						}
 
           } else if(face instanceof Face4) {
 
@@ -128,7 +128,8 @@ class Renderer {
            }
 
           }
-        }
+        })
+
       } else if (object instanceof Particle) {
         object.screen.copy(object.position);
 				
